@@ -1,0 +1,145 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+button, dialog {
+    outline: none;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #eaeaea;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header-wrapper {
+    background-color: hsl(240, 60%, 40%);
+    color: wheat;
+    box-shadow: 0px 1px 12px gray;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #eeeeee;
+}
+
+.header, .footer {
+    flex-basis: 1200px;
+    padding: 16px 32px;
+    display: flex;
+}
+
+.footer {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.github-code {
+    color: wheat;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-right: auto;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    flex-basis: 1200px;
+    padding: 16px 32px;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.card {
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f8f8f8;
+    box-shadow: 1px 1px 4px gray;
+}
+
+.add-card {
+    border-radius: 8px;
+    align-self: center;
+    padding: 16px;
+    background-color: #f8f8f8;
+
+    box-shadow: 1px 1px 4px gray;
+    display: flex;
+    align-items: center;
+    img {
+        width: 16px;
+    }
+}
+
+.has-read {
+    display: flex;
+    align-items: center;
+}
+
+.card > *:nth-child(n + 2) {
+    margin-top: 16px;
+}
+
+dialog {
+    border-radius: 16px;
+    box-shadow: 1px 1px 4px lightgray;
+}
+
+fieldset {
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    gap: 16px;
+}
+
+.finalize-button {
+    background-color: lightgray;
+    border-radius: 4px;
+    padding: 8px 0px;
+}
+
+.finalize-button:hover {
+    color: white;
+    background-color: gray;
+}
+
+.cancel-button {
+    background-color: hsl(0, 60%, 50%);
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: hsl(0, 80%, 30%);
+}
