@@ -50,6 +50,16 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
     buttonRemoveBook.appendChild(imgForbuttonRemoveBook);
 
     buttonRemoveBook.addEventListener("click", event => {
+        const isEqualToBook = book => {
+            let result = (book.author === author) &&
+                         (book.title === title) &&
+                         (book.pageCount === pageCount) &&
+                         (book.hasRead === hasRead);
+        };
+
+        let indexToRemove = myLibrary.find(isEqualToBook);
+        myLibrary.splice(indexToRemove, 1);
+        
         divCard.remove();
     })
 
@@ -84,7 +94,7 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
 
     resetAddButton();
 
-    const newBook = new Book(authorName.value, bookTitle.value, pageCount.value, hasRead.checked);
+    const newBook = new Book(author, title, pageCount, hasRead);
     myLibrary.push(newBook);
 }
 
