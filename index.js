@@ -1,8 +1,14 @@
-function Book(author, title, pageCount, hasRead) {
-    this.author = author;
-    this.title = title;
-    this.pageCount = pageCount;
-    this.hasRead = hasRead;
+class Book {
+    constructor(author, title, pageCount, hasRead) {
+        this.author = author;
+        this.title = title;
+        this.pageCount = pageCount;
+        this.hasRead = hasRead;
+    }
+
+    toggleHasRead() {
+        this.hasRead = !this.hasRead;
+    }
 }
 
 const myLibrary = [];
@@ -96,6 +102,10 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
 
     const newBook = new Book(author, title, pageCount, hasRead);
     myLibrary.push(newBook);
+
+    inputHasRead.addEventListener("click", () => {
+        newBook.toggleHasRead();
+    });
 }
 
 dialog.addEventListener("cancel", event => {
