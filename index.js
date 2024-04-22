@@ -14,10 +14,15 @@ class Book {
 const myLibrary = [];
 const contentDiv = document.querySelector(".content");
 
+const form = document.querySelector("form");
 const dialog = document.querySelector("dialog");
+
 const authorName = document.getElementById("author-name");
 const bookTitle = document.getElementById("book-title");
+
 const pageCount = document.getElementById("page-count");
+const pageCountError = document.querySelector("#page-count + .error");
+
 const hasRead = document.getElementById("read");
 const cancelButton = document.querySelector(".cancel-button");
 let isCancelled = false;
@@ -61,9 +66,10 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
                          (book.title === title) &&
                          (book.pageCount === pageCount) &&
                          (book.hasRead === hasRead);
+            return result;
         };
 
-        let indexToRemove = myLibrary.find(isEqualToBook);
+        const indexToRemove = myLibrary.find(isEqualToBook);
         myLibrary.splice(indexToRemove, 1);
         
         divCard.remove();
@@ -108,22 +114,47 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
     });
 }
 
+function showError(errorFor, errorDiv) {
+    if (errorFor.validity.valueMissing) {
+        errorDiv.textContent = "You need to add a value to this field.";
+    } else if (errorFor.validity.typeMismatch) {
+        errorDiv.textContent = "You need to enter a number to this field.";
+    }
+}
+
+function formIsValid() {
+    return bookTitle.validity.valid && authorName.validity.valid && pageCount.validity.valid;
+}
+
+[bookTitle, authorName, pageCount].forEach(errorFor => {
+    errorFor.addEventListener("input", event => {
+        const errorDiv = document.querySelector("#" + errorFor.getAttribute("id") + " + .error");
+        if (errorFor.validity.valid) {
+            errorDiv.textContent = "";
+            errorDiv.setAttribute("class", "error");
+        } else {
+            showError(errorFor, errorDiv);
+            errorDiv.setAttribute("class", "error active");
+        }
+    });
+});
+
 dialog.addEventListener("cancel", event => {
     document.querySelector("form").reset();
-    isCancelled = true;
 });
 
 cancelButton.addEventListener("click", event => {
-    isCancelled = true;
+    document.querySelector("form").reset();
     dialog.close();
-})
+});
 
-dialog.addEventListener("close", event => {
-    if (isCancelled) {
-        isCancelled = false;
-    } else {
+form.addEventListener("submit", event => {
+    if (formIsValid()) {
+        dialog.close();
         addBookToLibrary(authorName.value, bookTitle.value, pageCount.value, hasRead.checked);
+        document.querySelector("form").reset();
     }
-})
+    event.preventDefault();
+});
 
 addBookToLibrary("J.K. Rowling", "Harry Potter and the Chamber of Secrets", 251, false);

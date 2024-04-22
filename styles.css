@@ -170,3 +170,11 @@ input[type="text"]:invalid,
 input[type="number"]:invalid {
     border: 1px solid red;
 }
+
+.error.active {
+    margin-top: 4px;
+    background-color: hsl(0, 60%, 50%);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
